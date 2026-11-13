@@ -12,6 +12,7 @@ public partial class SmileyChatWindow : Window
     private readonly OllamaChatProvider catalog = new();
     private readonly Action<string> speak;
     private readonly SmileyActionDispatcher? actions;
+    private readonly Action<bool>? setActionsEnabled;
     private readonly CancellationTokenSource lifetime = new();
     private sealed record Entry(string Role, string Content, string Label, bool Simulated = false);
     private readonly Queue<Entry> recent = new();
@@ -22,9 +23,9 @@ public partial class SmileyChatWindow : Window
     private bool IsOllama => ProviderPicker.SelectedIndex == 1;
     private OllamaModel? SelectedModel => ModelPicker.SelectedItem as OllamaModel;
 
-    public SmileyChatWindow(Action<string> speak, SmileyActionDispatcher? actions = null)
+    public SmileyChatWindow(Action<string> speak, SmileyActionDispatcher? actions = null, Action<bool>? setActionsEnabled = null)
     {
-        InitializeComponent(); this.speak = speak; this.actions = actions;
+        InitializeComponent(); this.speak = speak; this.actions = actions; this.setActionsEnabled = setActionsEnabled;
         ProviderPicker.SelectedIndex = settings.Provider == ChatProviderKind.Ollama ? 1 : 0;
         UpdateProviderView(); initializing = false;
         Loaded += async (_, _) => { FocusInput(); if (IsOllama) await RefreshModelsAsync(); };
@@ -68,9 +69,22 @@ public partial class SmileyChatWindow : Window
         CancelReply.Visibility = activeRequest is null ? Visibility.Collapsed : Visibility.Visible;
         RefreshModels.IsEnabled = !refreshing; ModelPicker.IsEnabled = !refreshing;
     }
-    private void UpdateDescription() => ProviderDescription.Text = IsOllama
-        ? "Ollama local · " + (SelectedModel?.Name ?? "selecione um modelo instalado")
-        : "Demonstração local · respostas simuladas";
+    private void UpdateDescription()
+    {
+        ProviderDescription.Text = IsOllama
+            ? "Ollama local · " + (SelectedModel?.Name ?? "selecione um modelo instalado")
+            : "Demonstração local · respostas simuladas";
+        UpdateActionControl();
+    }
+    private void UpdateActionControl()
+    {
+        AllowAiActions.IsEnabled = actions is not null && setActionsEnabled is not null;
+        AllowAiActions.IsChecked = actions?.Enabled == true;
+        ActionControlDescription.Text = !IsOllama ? "Demonstração: somente conversa, sem executar ações."
+            : actions?.Enabled == true ? "Ações por IA ativadas · pedidos sujeitos à física e às opções do menu."
+            : "Somente conversa · ative a opção acima para pedir movimentos.";
+    }
+    private void OnAllowAiActions(object sender, RoutedEventArgs e) => setActionsEnabled?.Invoke(AllowAiActions.IsChecked == true);
     private void UpdateProviderView()
     {
         ModelControls.Visibility = IsOllama ? Visibility.Visible : Visibility.Collapsed;
@@ -96,6 +110,7 @@ public partial class SmileyChatWindow : Window
     public void NotifyActionControlChanged()
     {
         CancelResponse(false);
+        UpdateActionControl();
         Status.Text = actions?.Enabled == true ? "Ações por IA ativadas para novos pedidos ao Ollama." : "Ações por IA desativadas; a conversa continua disponível.";
     }
     private async void OnProviderChanged(object sender, SelectionChangedEventArgs e)
@@ -190,7 +205,8 @@ public partial class SmileyChatWindow : Window
             }
             AddHistory(new("assistant", actionNote is null ? reply : reply + "\n[" + actionNote + "]", label, simulated));
             speak(actionNote is null ? reply : reply + "\n" + actionNote);
-            Status.Text = actionNote ?? "Enter envia · Shift+Enter quebra a linha";
+            Status.Text = actionNote ?? (requestActions ? "O modelo não solicitou ação nesta resposta."
+                : IsOllama ? "Somente conversa · ações por IA desativadas." : "Enter envia · Shift+Enter quebra a linha");
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
         catch (ChatProviderException error)

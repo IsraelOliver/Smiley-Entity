@@ -214,7 +214,7 @@ public partial class MainWindow : Window
         commentary?.SetChatActive(true);
         if (chatWindow is null)
         {
-            chatWindow = new SmileyChatWindow(ShowSpeech, actions);
+            chatWindow = new SmileyChatWindow(ShowSpeech, actions, SetAiActionsEnabled);
             chatWindow.Closed += (_, _) => { chatWindow = null; if (!closing) commentary?.SetChatActive(false); };
             chatWindow.Show();
         }
@@ -325,8 +325,10 @@ public partial class MainWindow : Window
         AiActionsItem.Header = actions.Enabled ? "Ações controladas por IA: ativadas" : "Ações controladas por IA: desativadas";
     }
     private void OnAiActions(object sender, RoutedEventArgs e)
+        => SetAiActionsEnabled(AiActionsItem.IsChecked);
+    private void SetAiActionsEnabled(bool enabled)
     {
-        actions.SetEnabled(AiActionsItem.IsChecked);
+        actions.SetEnabled(enabled);
         chatWindow?.NotifyActionControlChanged();
         bool saved = ChatSettingsStore.Save(ChatSettingsStore.Load() with { AiActionsEnabled = actions.Enabled });
         UpdateActionsMenu();

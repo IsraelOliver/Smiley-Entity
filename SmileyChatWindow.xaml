@@ -60,6 +60,9 @@
                 <StackPanel Margin="0,0,40,0">
                     <TextBlock Text="Smiley" FontSize="20" FontWeight="SemiBold"/>
                     <TextBlock x:Name="ProviderDescription" Text="Demonstração local · respostas simuladas" Foreground="#B7B1C3" FontSize="11" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
+                    <CheckBox x:Name="AllowAiActions" Content="Permitir ações por IA" Foreground="#E2CFFF" Margin="0,10,0,0"
+                              Click="OnAllowAiActions" AutomationProperties.Name="Permitir ações por inteligência artificial"/>
+                    <TextBlock x:Name="ActionControlDescription" Foreground="#B7B1C3" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
                 </StackPanel>
                 <Button Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Padding="0" FontSize="20"
                         Background="Transparent" Click="OnClose" AutomationProperties.Name="Fechar conversa"/>
