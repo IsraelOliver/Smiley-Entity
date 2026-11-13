@@ -1,7 +1,8 @@
 namespace Smiley;
 
 public sealed record ChatMessage(string Role, string Content);
-public sealed record ChatRequest(string SystemInstruction, IReadOnlyList<ChatMessage> Messages);
+public sealed record ChatRequest(string SystemInstruction, IReadOnlyList<ChatMessage> Messages, int MaximumOutputTokens = 512,
+    bool RequestActions = false, string? ActionContext = null);
 
 public interface IChatProvider
 {

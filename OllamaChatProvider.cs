@@ -60,15 +60,24 @@ public sealed class OllamaChatProvider : IChatProvider
         var available = await GetModelsAsync(cancellationToken).ConfigureAwait(false);
         if (!available.Models.Any(m => m.Name == Model))
             throw new ChatProviderException("O modelo selecionado não está disponível como modelo local. Atualize a lista.");
-        var messages = new List<object> { new { role = "system", content = request.SystemInstruction } };
+        string instruction = request.RequestActions
+            ? request.SystemInstruction + "\n\n" + SmileyAgentResponse.ProtocolInstruction + "\n" + request.ActionContext
+            : request.SystemInstruction;
+        var messages = new List<object> { new { role = "system", content = instruction } };
         foreach (var message in request.Messages.TakeLast(8))
         {
             if (message.Role is not ("user" or "assistant")) throw new ChatProviderException("O contexto contém um papel de mensagem inválido.");
             messages.Add(new { role = message.Role, content = message.Content });
         }
+        var body = new Dictionary<string, object>
+        {
+            ["model"] = Model, ["messages"] = messages, ["stream"] = false,
+            ["options"] = new { num_predict = Math.Clamp(request.MaximumOutputTokens, 1, 512) }
+        };
+        if (request.RequestActions) body["format"] = SmileyAgentResponse.Schema;
         using var httpRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(server, "api/chat"))
         {
-            Content = JsonContent.Create(new { model = Model, messages, stream = false, options = new { num_predict = 512 } })
+            Content = JsonContent.Create(body)
         };
         using var document = await SendAsync(httpRequest, TimeSpan.FromMinutes(3), cancellationToken).ConfigureAwait(false);
         try

@@ -73,7 +73,11 @@
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                     <StackPanel Margin="0,0,8,0">
                         <TextBlock Text="Modelo instalado" Foreground="#B7B1C3" FontSize="11" Margin="0,0,0,5"/>
-                        <ComboBox x:Name="ModelPicker" DisplayMemberPath="Name" SelectionChanged="OnModelChanged" AutomationProperties.Name="Modelo Ollama local"/>
+                        <ComboBox x:Name="ModelPicker" SelectionChanged="OnModelChanged" AutomationProperties.Name="Modelo Ollama local">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/></DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <Button x:Name="RefreshModels" Grid.Column="1" Content="Atualizar" Click="OnRefreshModels" VerticalAlignment="Bottom" Padding="12,9" AutomationProperties.Name="Atualizar modelos"/>
                 </Grid>

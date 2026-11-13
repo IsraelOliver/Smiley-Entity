@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace Smiley;
 
 public enum ChatProviderKind { Demonstration, Ollama }
-public sealed record ChatSettings(ChatProviderKind Provider = ChatProviderKind.Demonstration, string Model = "");
+public sealed record ChatSettings(ChatProviderKind Provider = ChatProviderKind.Demonstration, string Model = "", bool CommentsEnabled = true, bool AiActionsEnabled = false);
 internal static class ChatSettingsStore
 {
     private static readonly string Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Smiley", "chat-settings.json");

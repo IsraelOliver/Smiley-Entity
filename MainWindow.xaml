@@ -1,5 +1,5 @@
 <Window x:Class="Smiley.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Smiley Desktop — Mark IV.B" Width="210" Height="190" WindowStyle="None" ResizeMode="NoResize"
+        Title="Smiley Desktop — Mark V.A" Width="210" Height="190" WindowStyle="None" ResizeMode="NoResize"
         AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False" Topmost="True" ShowActivated="False"
         MouseLeftButtonDown="OnMouseDown" MouseMove="OnMouseMove" MouseLeftButtonUp="OnMouseUp" LostMouseCapture="OnLostCapture">
     <Image x:Name="Character" Stretch="Uniform" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
@@ -7,6 +7,8 @@
         <Image.ContextMenu>
             <ContextMenu Opened="OnMenuOpened" Closed="OnMenuClosed">
                 <MenuItem x:Name="ChatItem" Header="Conversar com Smiley" Click="OnChat" />
+                <MenuItem x:Name="AiActionsItem" Header="Ações controladas por IA: desativadas" IsCheckable="True" Click="OnAiActions" ToolTip="Somente pedidos explícitos pelo chat com Ollama local; respeita autonomia, pausa e exploração." />
+                <MenuItem x:Name="CommentsItem" Header="Comentários espontâneos: ativados" IsCheckable="True" IsChecked="True" Click="OnComments" ToolTip="Reações locais predefinidas e comentários ocasionais do Ollama local" />
                 <MenuItem x:Name="PauseItem" Header="Pausar" Click="OnPause" />
                 <MenuItem x:Name="AutonomyItem" Header="Autonomia ativada" IsCheckable="True" IsChecked="True" Click="OnAutonomy" />
                 <MenuItem x:Name="ExploreItem" Header="Explorar janelas: desativado" IsCheckable="True" Click="OnExplore" />

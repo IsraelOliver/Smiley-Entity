@@ -67,6 +67,8 @@ public sealed class SmileyBehaviorController
     private readonly List<nint> expiredRetries = new();
     private NavigationPlan? navigationPlan;
     private NavigationStage navigationStage;
+    private double requestedRemaining;
+    public bool HasRequestedAction => requestedRemaining > 1e-9;
     private long plannedVersion;
     private WorkArea plannedArea;
     private double plannedWidth, plannedScaleX, plannedScaleY;
@@ -102,6 +104,7 @@ public sealed class SmileyBehaviorController
     public void SetEnabled(bool enabled)
     {
         if (Enabled == enabled) return;
+        if (!enabled) CancelRequestedAction();
         if (!enabled) CancelNavigation("Autonomia desativada.");
         Enabled = enabled; resume = null; ResetCursor();
         if (controller.State == SmileyState.Idle) EnterRest();
@@ -110,6 +113,7 @@ public sealed class SmileyBehaviorController
     public void SetPreference(MovementPreference preference)
     {
         if (!Enum.IsDefined(preference)) throw new ArgumentOutOfRangeException(nameof(preference));
+        CancelRequestedAction();
         Preference = preference;
         if (ExploreWindows) { CancelNavigation("Modo de deslocamento alterado."); controller.TryRest(); }
         if (preference != MovementPreference.Automatic)
@@ -122,6 +126,7 @@ public sealed class SmileyBehaviorController
 
     public void NotifyManualInteraction()
     {
+        CancelRequestedAction();
         CancelNavigation("Interação manual tem prioridade.");
         quiet = options.ManualQuietSeconds; resume = null;
         CurrentAction = BehaviorAction.Idle;
@@ -135,6 +140,7 @@ public sealed class SmileyBehaviorController
     public void SetExploreWindows(bool enabled)
     {
         if (ExploreWindows == enabled) return;
+        if (CurrentAction == BehaviorAction.Explore) CancelRequestedAction();
         CancelNavigation(enabled ? "Exploração ativada; aguardando decisão." : "Exploração desativada.");
         ExploreWindows = enabled;
         // Do not keep an old unbounded wander running when enabling safe exploration.
@@ -163,6 +169,69 @@ public sealed class SmileyBehaviorController
     }
     private bool Blocked(nint handle) => retryAfter.TryGetValue(handle, out var until) && until > decisionTime;
     private double NavigationSpeed => Preference == MovementPreference.Walking ? controller.MotionLimits.WalkSpeed : controller.MotionLimits.RunSpeed;
+
+    // Explicit high-level requests reuse this controller's existing movement/navigation state.
+    // Their finite reservation prevents a random decision from immediately replacing the request.
+    public SmileyActionResult TryRequestAction(SmileyActionType type, SmileyActionEnvironment environment)
+    {
+        if (!Enum.IsDefined(type)) return new(false, "Tipo de ação não permitido.");
+        if (type == SmileyActionType.None) return new(true, "");
+        if (controller.Paused) return new(false, "O Smiley está pausado.");
+        if (!Enabled) return new(false, "A autonomia está desativada; a IA não vai reativá-la.");
+        if (!controller.IsGrounded) return new(false, "O Smiley está no ar; aguarde a aterrissagem.");
+        if (quiet > 1e-9 || controller.State is SmileyState.Dragging or SmileyState.Reacting)
+            return new(false, "Uma interação direta tem prioridade agora.");
+        var (area, width, sx, sy) = environment;
+        if (!double.IsFinite(width) || width <= 0 || !double.IsFinite(sx) || sx <= 0 || !double.IsFinite(sy) || sy <= 0 ||
+            !double.IsFinite(area.Left) || !double.IsFinite(area.Right) || !double.IsFinite(area.Top) || !double.IsFinite(area.Bottom) ||
+            area.Right <= area.Left || area.Bottom <= area.Top)
+            return new(false, "Geometria de execução indisponível.");
+        if (type == SmileyActionType.Explore && !ExploreWindows)
+            return new(false, "A exploração de janelas está desativada.");
+        CancelRequestedAction(); CancelNavigation("Novo pedido explícito de ação."); resume = null;
+        if (type == SmileyActionType.Idle)
+        {
+            if (!controller.TryRest()) return new(false, "Não foi possível repousar agora.");
+            CurrentAction = BehaviorAction.Idle; requestedRemaining = Math.Clamp(options.IdleMin, 1, 10);
+            return new(true, $"Repouso iniciado por até {requestedRemaining:0.#} s.");
+        }
+        if (type == SmileyActionType.Jump)
+        {
+            if (controller.Y - controller.JumpHeight * sy < area.Top + options.HopTopMargin * sy || !controller.TryJump(sy))
+                return new(false, "Salto recusado: apoio ou espaço vertical insuficiente.");
+            CurrentAction = BehaviorAction.Hop; hopCooldown = options.HopCooldown;
+            return new(true, "Salto iniciado.");
+        }
+        if (type == SmileyActionType.Explore)
+        {
+            if (navigationCooldown > 1e-9) return new(false, "A navegação está em intervalo de recuperação.");
+            if (!StartNavigation(area, width, sx, sy) || navigationPlan is null)
+                return new(false, "Exploração não iniciada: " + NavigationStatus.Status);
+            requestedRemaining = 15; // One existing plan only, never an endless exploration loop.
+            return new(true, "Exploração iniciada; a chegada ainda depende da física.");
+        }
+        if (!navigation.TrySafeRange(controller, area, width, sx, out var left, out var right))
+            return new(false, "Não há espaço seguro para esse deslocamento.");
+        bool run = type == SmileyActionType.Run;
+        var mode = run ? MovementMode.Running : MovementMode.Walking;
+        double duration = run ? Math.Clamp(options.RunMin, .5, 2) : Math.Clamp(options.WanderMin, .5, 4);
+        double speed = (run ? controller.MotionLimits.RunSpeed : controller.MotionLimits.WalkSpeed) * sx;
+        int direction = controller.Direction;
+        double room = direction > 0 ? right - controller.X : controller.X - left;
+        if (room < options.MinimumTravel * sx) { direction = -direction; room = direction > 0 ? right - controller.X : controller.X - left; }
+        if (room < options.MinimumTravel * sx) return new(false, "Não há espaço seguro para esse deslocamento.");
+        duration = Math.Min(duration, room / speed);
+        if (!controller.TryMove(mode, direction, duration)) return new(false, "Deslocamento recusado pela física.");
+        CurrentAction = run ? BehaviorAction.Run : BehaviorAction.Wander; requestedRemaining = duration;
+        return new(true, (run ? "Corrida" : "Caminhada") + $" iniciada por até {duration:0.#} s.");
+    }
+    public void CancelRequestedAction()
+    {
+        if (!HasRequestedAction) return;
+        requestedRemaining = 0;
+        CancelNavigation("Pedido explícito encerrado.");
+        controller.TryRest(); EnterRest();
+    }
 
     private bool StartNavigation(WorkArea area, double width, double sx, double sy)
     {
@@ -242,8 +311,14 @@ public sealed class SmileyBehaviorController
         cursorCooldown = Math.Max(0, cursorCooldown - dt);
         hopCooldown = Math.Max(0, hopCooldown - dt);
         bool encounter = ObserveCursor(cursor, width, height, sx, sy);
+        if (HasRequestedAction)
+        {
+            requestedRemaining = Math.Max(0, requestedRemaining - dt);
+            if (!HasRequestedAction)
+            { CancelNavigation("Tempo do pedido explícito encerrado."); controller.TryRest(); EnterRest(); }
+        }
         if (controller.State is SmileyState.Dragging or SmileyState.Reacting)
-        { if (navigationPlan is not null) CancelNavigation("Reação ou arrasto interrompeu o plano."); return; }
+        { CancelRequestedAction(); if (navigationPlan is not null) CancelNavigation("Reação ou arrasto interrompeu o plano."); return; }
         if (navigationPlan is { } flight && navigationStage == Smiley.NavigationStage.Flying)
         {
             if (!controller.IsGrounded) return; // Never flee or steer an existing flight.
@@ -254,7 +329,7 @@ public sealed class SmileyBehaviorController
                 landed = center >= flight.Target.Left + shift && center <= flight.Target.Right + shift;
             }
             if (!landed) RememberFailure(flight.Target.Handle);
-            navigationPlan = null; navigationCooldown = options.NavigationCooldown;
+            navigationPlan = null; navigationCooldown = options.NavigationCooldown; requestedRemaining = 0;
             NavigationStatus = new(landed ? "Aterrissagem confirmada no destino." : "Destino não alcançado; tentativa em cooldown.", controller.ActiveSupport?.Handle ?? 0, flight.Target.Handle);
             EnterRest(); return;
         }
@@ -268,6 +343,16 @@ public sealed class SmileyBehaviorController
         {
             if (controller.State == SmileyState.Idle) controller.TryRest();
             return; // Finite moves finish in the motion controller; physics remains active.
+        }
+        if (HasRequestedAction)
+        {
+            if (navigationPlan is not null) { AdvanceNavigation(area, width, sx, sy); return; }
+            if (CurrentAction == BehaviorAction.Idle) { controller.TryRest(); return; }
+            double speed = controller.MovementMode == MovementMode.Running ? controller.MotionLimits.RunSpeed : controller.MotionLimits.WalkSpeed;
+            double endpoint = controller.X + controller.Direction * speed * sx * controller.ActionTimeRemaining;
+            if (!controller.IsMoving || !navigation.TrySafeRange(controller, area, width, sx, out var left, out var right) || endpoint < left - 1e-6 || endpoint > right + 1e-6)
+                CancelRequestedAction();
+            return;
         }
         if (encounter && cursorCooldown <= 1e-9 && CurrentAction is not (BehaviorAction.Curious or BehaviorAction.Flee))
         {

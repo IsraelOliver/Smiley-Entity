@@ -11,6 +11,7 @@ public partial class SmileyChatWindow : Window
     private readonly IChatProvider demonstration = new MockChatProvider();
     private readonly OllamaChatProvider catalog = new();
     private readonly Action<string> speak;
+    private readonly SmileyActionDispatcher? actions;
     private readonly CancellationTokenSource lifetime = new();
     private sealed record Entry(string Role, string Content, string Label, bool Simulated = false);
     private readonly Queue<Entry> recent = new();
@@ -21,9 +22,9 @@ public partial class SmileyChatWindow : Window
     private bool IsOllama => ProviderPicker.SelectedIndex == 1;
     private OllamaModel? SelectedModel => ModelPicker.SelectedItem as OllamaModel;
 
-    public SmileyChatWindow(Action<string> speak)
+    public SmileyChatWindow(Action<string> speak, SmileyActionDispatcher? actions = null)
     {
-        InitializeComponent(); this.speak = speak;
+        InitializeComponent(); this.speak = speak; this.actions = actions;
         ProviderPicker.SelectedIndex = settings.Provider == ChatProviderKind.Ollama ? 1 : 0;
         UpdateProviderView(); initializing = false;
         Loaded += async (_, _) => { FocusInput(); if (IsOllama) await RefreshModelsAsync(); };
@@ -79,7 +80,7 @@ public partial class SmileyChatWindow : Window
     }
     private void SaveChoice()
     {
-        settings = new(IsOllama ? ChatProviderKind.Ollama : ChatProviderKind.Demonstration, SelectedModel?.Name ?? settings.Model);
+        settings = ChatSettingsStore.Load() with { Provider = IsOllama ? ChatProviderKind.Ollama : ChatProviderKind.Demonstration, Model = SelectedModel?.Name ?? settings.Model };
         if (!ChatSettingsStore.Save(settings)) Status.Text = "Escolha aplicada, mas não foi possível salvá-la.";
     }
     private void CancelResponse(bool showStatus)
@@ -92,6 +93,11 @@ public partial class SmileyChatWindow : Window
         listVersion++; listRequest?.Cancel(); listRequest = null; refreshing = false;
     }
     private void OnCancelReply(object sender, RoutedEventArgs e) => CancelResponse(true);
+    public void NotifyActionControlChanged()
+    {
+        CancelResponse(false);
+        Status.Text = actions?.Enabled == true ? "Ações por IA ativadas para novos pedidos ao Ollama." : "Ações por IA desativadas; a conversa continua disponível.";
+    }
     private async void OnProviderChanged(object sender, SelectionChangedEventArgs e)
     {
         if (initializing || closed) return;
@@ -154,6 +160,8 @@ public partial class SmileyChatWindow : Window
         IChatProvider provider = IsOllama ? new OllamaChatProvider(SelectedModel!.Name) : demonstration;
         string label = IsOllama ? "Smiley · Ollama / " + SelectedModel!.Name : "Smiley · demonstração";
         bool simulated = !IsOllama;
+        bool requestActions = IsOllama && actions?.Enabled == true;
+        long actionRevision = actions?.Revision ?? 0;
         using var cancellation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
         int version = ++responseVersion; activeRequest = cancellation;
         UpdateReady(); Input.Clear();
@@ -161,14 +169,28 @@ public partial class SmileyChatWindow : Window
         Status.Text = IsOllama ? "Respondendo… O primeiro carregamento pode demorar." : "Preparando resposta simulada…";
         AddHistory(new("user", message, "Você"));
         var request = new ChatRequest(SmileyIdentity.SystemInstruction, recent.Select(e => new ChatMessage(e.Role,
-            e.Simulated ? "[Resposta simulada da demonstração] " + e.Content : e.Content)).ToArray());
+            e.Simulated ? "[Resposta simulada da demonstração] " + e.Content : e.Content)).ToArray(),
+            RequestActions: requestActions, ActionContext: requestActions ? actions!.DescribeState() : null);
         try
         {
             string reply = await provider.GetReplyAsync(request, cancellation.Token);
             if (closed || version != responseVersion || cancellation.IsCancellationRequested) return;
             if (string.IsNullOrWhiteSpace(reply)) { Status.Text = "Sem resposta. Tente outra mensagem."; return; }
-            AddHistory(new("assistant", reply, label, simulated)); speak(reply);
-            Status.Text = "Enter envia · Shift+Enter quebra a linha";
+            string? actionNote = null;
+            if (requestActions)
+            {
+                var response = SmileyAgentResponse.Parse(reply);
+                reply = response.Reply;
+                if (response.ValidationMessage is not null) actionNote = response.ValidationMessage;
+                else
+                {
+                    var result = actions!.Dispatch(response.Action, actionRevision);
+                    if (result.Message.Length > 0) actionNote = result.Accepted ? result.Message : "Não executada: " + result.Message;
+                }
+            }
+            AddHistory(new("assistant", actionNote is null ? reply : reply + "\n[" + actionNote + "]", label, simulated));
+            speak(actionNote is null ? reply : reply + "\n" + actionNote);
+            Status.Text = actionNote ?? "Enter envia · Shift+Enter quebra a linha";
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
         catch (ChatProviderException error)
