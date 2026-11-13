@@ -1,0 +1,111 @@
+<Window x:Class="Smiley.SmileyChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Smiley" Width="500" Height="570" MinWidth="420" MinHeight="510"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="True" WindowStartupLocation="CenterScreen" PreviewKeyDown="OnWindowKeyDown"
+        FontFamily="Segoe UI" Foreground="#F4F2FA">
+    <Window.Resources>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="#F4F2FA"/><Setter Property="Background" Value="#25232D"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True"><Setter Property="Background" Value="#51415E"/></Trigger>
+                <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#44364F"/></Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#F4F2FA"/><Setter Property="Background" Value="#25232D"/>
+            <Setter Property="BorderBrush" Value="#51495F"/><Setter Property="MinHeight" Value="34"/>
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ComboBox">
+                <Grid>
+                    <ToggleButton Focusable="False" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                        <ToggleButton.Template><ControlTemplate TargetType="ToggleButton">
+                            <Border Background="#25232D" BorderBrush="#51495F" BorderThickness="1" CornerRadius="7">
+                                <TextBlock Text="▾" Foreground="#B7B1C3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            </Border>
+                        </ControlTemplate></ToggleButton.Template>
+                    </ToggleButton>
+                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      IsHitTestVisible="False" Margin="10,6,28,6" VerticalAlignment="Center"/>
+                    <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" AllowsTransparency="True" Focusable="False">
+                        <Border Background="#25232D" BorderBrush="#51495F" BorderThickness="1" CornerRadius="7" MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ScrollViewer MaxHeight="220" VerticalScrollBarVisibility="Auto"><ItemsPresenter/></ScrollViewer>
+                        </Border>
+                    </Popup>
+                </Grid>
+                <ControlTemplate.Triggers><Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.45"/></Trigger></ControlTemplate.Triggers>
+            </ControlTemplate></Setter.Value></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#F4F2FA"/><Setter Property="Background" Value="#34313F"/>
+            <Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="16,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+                <Border x:Name="Surface" Background="{TemplateBinding Background}" CornerRadius="9" Padding="{TemplateBinding Padding}">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="Opacity" Value="0.8"/></Trigger>
+                    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Surface" Property="Opacity" Value="0.45"/></Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate></Setter.Value></Setter>
+        </Style>
+    </Window.Resources>
+    <Border Background="#19181F" BorderBrush="#45414F" BorderThickness="1" CornerRadius="16" Padding="20,16,20,18">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid MouseLeftButtonDown="OnHeaderDrag" Background="Transparent" Margin="0,0,0,14">
+                <StackPanel Margin="0,0,40,0">
+                    <TextBlock Text="Smiley" FontSize="20" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="ProviderDescription" Text="Demonstração local · respostas simuladas" Foreground="#B7B1C3" FontSize="11" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <Button Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Padding="0" FontSize="20"
+                        Background="Transparent" Click="OnClose" AutomationProperties.Name="Fechar conversa"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="0,0,0,14">
+                <TextBlock Text="Provedor" Foreground="#B7B1C3" FontSize="11" Margin="0,0,0,5"/>
+                <ComboBox x:Name="ProviderPicker" SelectionChanged="OnProviderChanged" AutomationProperties.Name="Provedor de conversa">
+                    <ComboBoxItem Content="Demonstração local"/><ComboBoxItem Content="Ollama local"/>
+                </ComboBox>
+                <Grid x:Name="ModelControls" Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,8,0">
+                        <TextBlock Text="Modelo instalado" Foreground="#B7B1C3" FontSize="11" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="ModelPicker" DisplayMemberPath="Name" SelectionChanged="OnModelChanged" AutomationProperties.Name="Modelo Ollama local"/>
+                    </StackPanel>
+                    <Button x:Name="RefreshModels" Grid.Column="1" Content="Atualizar" Click="OnRefreshModels" VerticalAlignment="Bottom" Padding="12,9" AutomationProperties.Name="Atualizar modelos"/>
+                </Grid>
+                <TextBlock x:Name="ConnectionStatus" Text="Sem conexão externa. Respostas de demonstração." TextWrapping="Wrap" Foreground="#B7B1C3" FontSize="11" Margin="0,7,0,0"/>
+            </StackPanel>
+            <ScrollViewer x:Name="HistoryScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="0,0,0,14">
+                <TextBlock x:Name="History" Text="Escreva uma mensagem. Minha resposta aparece junto de mim, na área de trabalho."
+                           TextWrapping="Wrap" FontSize="13" LineHeight="20" Foreground="#CEC8D9"/>
+            </ScrollViewer>
+            <Border Grid.Row="3" Background="#25232D" BorderBrush="#51495F" BorderThickness="1" CornerRadius="10" Padding="12,10">
+                <Grid>
+                    <TextBox x:Name="Input" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="70" MaxHeight="140" MaxLength="1000"
+                             VerticalScrollBarVisibility="Auto" Background="Transparent" BorderThickness="0" Foreground="#F4F2FA"
+                             CaretBrush="#E2CFFF" SelectionBrush="#635079" FontSize="14" PreviewKeyDown="OnInputKeyDown"
+                             AutomationProperties.Name="Mensagem para Smiley"/>
+                    <TextBlock Text="O que você quer me contar?" IsHitTestVisible="False" Foreground="#928A9F" FontSize="14">
+                        <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers><DataTrigger Binding="{Binding Text, ElementName=Input}" Value=""><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers>
+                        </Style></TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="4" Margin="0,12,0,0">
+                <StackPanel VerticalAlignment="Center" Margin="0,0,190,0">
+                    <TextBlock x:Name="Status" Text="Enter envia · Shift+Enter quebra a linha" Foreground="#A49BAD" FontSize="10" TextWrapping="Wrap"/>
+                    <TextBlock Text="Esc fecha" Foreground="#827A8C" FontSize="10" Margin="0,3,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="CancelReply" Content="Cancelar" Visibility="Collapsed" Margin="0,0,8,0" Click="OnCancelReply" Padding="10,9"/>
+                    <Button x:Name="Send" Content="Enviar" Background="#665178" Click="OnSend" AutomationProperties.Name="Enviar mensagem"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

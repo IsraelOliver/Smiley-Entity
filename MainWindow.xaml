@@ -1,0 +1,26 @@
+<Window x:Class="Smiley.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Smiley Desktop — Mark IV.B" Width="210" Height="190" WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False" Topmost="True" ShowActivated="False"
+        MouseLeftButtonDown="OnMouseDown" MouseMove="OnMouseMove" MouseLeftButtonUp="OnMouseUp" LostMouseCapture="OnLostCapture">
+    <Image x:Name="Character" Stretch="Uniform" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Image.RenderTransform><ScaleTransform x:Name="Facing" ScaleX="1" /></Image.RenderTransform>
+        <Image.ContextMenu>
+            <ContextMenu Opened="OnMenuOpened" Closed="OnMenuClosed">
+                <MenuItem x:Name="ChatItem" Header="Conversar com Smiley" Click="OnChat" />
+                <MenuItem x:Name="PauseItem" Header="Pausar" Click="OnPause" />
+                <MenuItem x:Name="AutonomyItem" Header="Autonomia ativada" IsCheckable="True" IsChecked="True" Click="OnAutonomy" />
+                <MenuItem x:Name="ExploreItem" Header="Explorar janelas: desativado" IsCheckable="True" Click="OnExplore" />
+                <MenuItem x:Name="JumpItem" Header="Pular" Click="OnJump" />
+                <MenuItem Header="Modo de deslocamento">
+                    <MenuItem x:Name="AutoItem" Header="Automático" IsCheckable="True" IsChecked="True" Click="OnAutoMode" />
+                    <MenuItem x:Name="WalkItem" Header="Caminhar" IsCheckable="True" Click="OnWalkMode" />
+                    <MenuItem x:Name="RunItem" Header="Correr" IsCheckable="True" Click="OnRunMode" />
+                </MenuItem>
+                <MenuItem x:Name="TopmostItem" Header="Manter sempre visível" IsCheckable="True" IsChecked="True" Click="OnTopmost" />
+                <MenuItem x:Name="WindowDiagnosticsItem" Header="Diagnóstico de janelas" IsCheckable="True" Click="OnWindowDiagnostics" />
+                <Separator />
+                <MenuItem Header="Sair" Click="OnExit" />
+            </ContextMenu>
+        </Image.ContextMenu>
+    </Image>
+</Window>

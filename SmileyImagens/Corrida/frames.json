@@ -1,0 +1,95 @@
+{
+  "Source": "Folha de sprites_ corrida do personagem encapuzado.png",
+  "SourceSha256": "CF22DC2544BF568FD4CE49D6527925CCFC9EF3CE599D4B1E28F520C7214F03B0",
+  "FrameSize": 444,
+  "Frames": [
+    {
+      "File": "frame_01.png",
+      "X": 0,
+      "Y": 0,
+      "Width": 444,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 0,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_02.png",
+      "X": 444,
+      "Y": 0,
+      "Width": 443,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 0,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_03.png",
+      "X": 887,
+      "Y": 0,
+      "Width": 444,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 10,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_04.png",
+      "X": 1331,
+      "Y": 0,
+      "Width": 443,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 15,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_05.png",
+      "X": 0,
+      "Y": 444,
+      "Width": 444,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 16,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_06.png",
+      "X": 444,
+      "Y": 444,
+      "Width": 443,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 11,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_07.png",
+      "X": 887,
+      "Y": 444,
+      "Width": 444,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 0,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_08.png",
+      "X": 1331,
+      "Y": 444,
+      "Width": 443,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 3,
+      "Baseline": 443
+    }
+  ]
+}

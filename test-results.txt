@@ -1,0 +1,622 @@
+PASS: initial idle
+PASS: idle transitions to walking
+PASS: time-based speed
+PASS: equivalent movement across frame rates and transition
+PASS: pause freezes and preserves autonomy state
+PASS: click reaction while paused
+PASS: global pause also freezes reaction timer
+PASS: reaction expires after global resume
+PASS: drag suspends autonomy
+PASS: drag clamps both axes including negative screen coordinates
+PASS: release retains position
+PASS: long simulation lands and remains inside work area
+PASS: work area smaller than sprite keeps feet on floor without adding ceiling collision
+PASS: decode and alpha audit: Cheering Hooded Mascot with Energy Rays.png
+PASS: decode and alpha audit: Chibi Shadow Mascot Reaching Out.png
+PASS: decode and alpha audit: Confident Hooded Pixel Hero.png
+PASS: decode and alpha audit: Fearless Hooded Mascot Pose.png
+PASS: decode and alpha audit: Folha de sprites_ corrida do personagem encapuzado.png
+PASS: decode and alpha audit: Folhagens do Caminho em Oito Passos.png
+PASS: decode and alpha audit: Frowning Hooded Void Mascot.png
+PASS: decode and alpha audit: Hooded Chibi with Reflective Shades.png
+PASS: decode and alpha audit: Hooded Detective with Magnifying Glass.png
+PASS: decode and alpha audit: Joyful Hooded Character Waving.png
+PASS: decode and alpha audit: Mascote Sombra em Queda.png
+PASS: decode and alpha audit: Neutral Hooded Shadow Mascot.png
+PASS: decode and alpha audit: Running Hooded Sprite in Motion.png
+PASS: decode and alpha audit: Sceptical Hooded Chibi Character.png
+PASS: decode and alpha audit: Shadowy Voxel Mascot Reaching Upward.png
+PASS: decode and alpha audit: Startled Hooded Chibi Character.png
+PASS: all current source PNGs have fully transparent pixels
+PASS: runtime sprite loader reports no opaque backgrounds
+PASS: all five poses resolve from output directory
+PASS: walk starts at frame 1
+PASS: walking frame lasts 250ms at 4fps
+PASS: walk frame order 1 then 2
+PASS: walking advances to frame 3 after 500ms
+PASS: walking 65 DIPs per second
+PASS: selecting active mode does not reset sequence
+PASS: switch to run resets cycle once without moving anchor or facing
+PASS: running frame 2 after 125ms
+PASS: running frame 3 after 250ms
+PASS: running advances to frame 4 after 375ms
+PASS: running 140 DIPs per second
+PASS: eight running frames loop after one second at 8fps
+PASS: walking frame order 2 including full two-second cycle
+PASS: walking frame order 3 including full two-second cycle
+PASS: walking frame order 4 including full two-second cycle
+PASS: walking frame order 5 including full two-second cycle
+PASS: walking frame order 6 including full two-second cycle
+PASS: walking frame order 7 including full two-second cycle
+PASS: walking frame order 8 including full two-second cycle
+PASS: walking frame order 9 including full two-second cycle
+PASS: running frame order 2 including full one-second cycle
+PASS: running frame order 3 including full one-second cycle
+PASS: running frame order 4 including full one-second cycle
+PASS: running frame order 5 including full one-second cycle
+PASS: running frame order 6 including full one-second cycle
+PASS: running frame order 7 including full one-second cycle
+PASS: running frame order 8 including full one-second cycle
+PASS: running frame order 9 including full one-second cycle
+PASS: switch back to walking
+PASS: Walking: animation and travel independent of update rate
+PASS: Running: animation and travel independent of update rate
+PASS: run speed scales with 150 percent DPI
+PASS: reaction interrupts run animation and movement
+PASS: reaction returns to neutral
+PASS: drag interrupts running cycle
+PASS: drag release returns to neutral
+PASS: mode selection preserves pause
+PASS: resume uses selected movement mode
+PASS: end of running interval returns to neutral and resets frame
+PASS: run stops at work area edge without walking in place
+PASS: custom walking speed and frame rate
+PASS: custom running speed and frame rate
+PASS: invalid timing options rejected
+PASS: Walking frame 1: decoded image reused
+PASS: Walking frame 1: common alignment canvas
+PASS: Walking frame 1: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 1: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 1: 69;18;99;172
+PASS: Walking frame 1: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 1: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 1: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 1: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 1: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 1: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 2: decoded image reused
+PASS: Walking frame 2: common alignment canvas
+PASS: Walking frame 2: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 2: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 2: 67;24;100;166
+PASS: Walking frame 2: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 2: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 2: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 2: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 2: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 2: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 3: decoded image reused
+PASS: Walking frame 3: common alignment canvas
+PASS: Walking frame 3: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 3: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 3: 58;19;110;171
+PASS: Walking frame 3: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 3: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 3: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 3: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 3: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 3: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 4: decoded image reused
+PASS: Walking frame 4: common alignment canvas
+PASS: Walking frame 4: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 4: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 4: 67;21;101;169
+PASS: Walking frame 4: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 4: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 4: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 4: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 4: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 4: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 5: decoded image reused
+PASS: Walking frame 5: common alignment canvas
+PASS: Walking frame 5: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 5: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 5: 69;20;99;170
+PASS: Walking frame 5: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 5: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 5: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 5: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 5: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 5: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 6: decoded image reused
+PASS: Walking frame 6: common alignment canvas
+PASS: Walking frame 6: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 6: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 6: 67;19;100;171
+PASS: Walking frame 6: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 6: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 6: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 6: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 6: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 6: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 7: decoded image reused
+PASS: Walking frame 7: common alignment canvas
+PASS: Walking frame 7: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 7: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 7: 63;19;105;171
+PASS: Walking frame 7: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 7: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 7: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 7: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 7: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 7: visible contact within two physical pixels of floor at 200% DPI
+PASS: Walking frame 8: decoded image reused
+PASS: Walking frame 8: common alignment canvas
+PASS: Walking frame 8: mirrored anchor and alpha at 100% DPI
+PASS: Walking frame 8: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Walking 8: 69;18;98;172
+PASS: Walking frame 8: mirrored anchor and alpha at 125% DPI
+PASS: Walking frame 8: visible contact within two physical pixels of floor at 125% DPI
+PASS: Walking frame 8: mirrored anchor and alpha at 150% DPI
+PASS: Walking frame 8: visible contact within two physical pixels of floor at 150% DPI
+PASS: Walking frame 8: mirrored anchor and alpha at 200% DPI
+PASS: Walking frame 8: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 1: decoded image reused
+PASS: Running frame 1: common alignment canvas
+PASS: Running frame 1: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 1: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 1: 33;16;141;174
+PASS: Running frame 1: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 1: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 1: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 1: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 1: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 1: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 2: decoded image reused
+PASS: Running frame 2: common alignment canvas
+PASS: Running frame 2: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 2: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 2: 48;22;124;168
+PASS: Running frame 2: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 2: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 2: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 2: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 2: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 2: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 3: decoded image reused
+PASS: Running frame 3: common alignment canvas
+PASS: Running frame 3: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 3: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 3: 52;22;122;168
+PASS: Running frame 3: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 3: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 3: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 3: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 3: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 3: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 4: decoded image reused
+PASS: Running frame 4: common alignment canvas
+PASS: Running frame 4: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 4: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 4: 55;25;117;165
+PASS: Running frame 4: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 4: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 4: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 4: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 4: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 4: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 5: decoded image reused
+PASS: Running frame 5: common alignment canvas
+PASS: Running frame 5: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 5: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 5: 51;22;122;168
+PASS: Running frame 5: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 5: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 5: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 5: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 5: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 5: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 6: decoded image reused
+PASS: Running frame 6: common alignment canvas
+PASS: Running frame 6: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 6: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 6: 45;22;127;168
+PASS: Running frame 6: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 6: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 6: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 6: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 6: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 6: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 7: decoded image reused
+PASS: Running frame 7: common alignment canvas
+PASS: Running frame 7: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 7: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 7: 46;18;127;172
+PASS: Running frame 7: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 7: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 7: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 7: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 7: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 7: visible contact within two physical pixels of floor at 200% DPI
+PASS: Running frame 8: decoded image reused
+PASS: Running frame 8: common alignment canvas
+PASS: Running frame 8: mirrored anchor and alpha at 100% DPI
+PASS: Running frame 8: visible contact within two physical pixels of floor at 100% DPI
+ALIGN: Running 8: 34;16;139;174
+PASS: Running frame 8: mirrored anchor and alpha at 125% DPI
+PASS: Running frame 8: visible contact within two physical pixels of floor at 125% DPI
+PASS: Running frame 8: mirrored anchor and alpha at 150% DPI
+PASS: Running frame 8: visible contact within two physical pixels of floor at 150% DPI
+PASS: Running frame 8: mirrored anchor and alpha at 200% DPI
+PASS: Running frame 8: visible contact within two physical pixels of floor at 200% DPI
+PASS: whole-cell normalization keeps visual height between 160 and 181 DIPs
+PASS: all sixteen frames stay within window bounds
+PASS: body reference remains fixed across frames and cycles
+PASS: Corrida: original sheet unchanged
+PASS: Corrida: original RGBA grid dimensions
+PASS: Corrida: export order frame_01.png
+PASS: Corrida/frame_01.png: 444x444 with alpha
+PASS: Corrida/frame_01.png: exact proportional grid position
+PASS: Corrida/frame_01.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_01.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_02.png
+PASS: Corrida/frame_02.png: 444x444 with alpha
+PASS: Corrida/frame_02.png: exact proportional grid position
+PASS: Corrida/frame_02.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_02.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_03.png
+PASS: Corrida/frame_03.png: 444x444 with alpha
+PASS: Corrida/frame_03.png: exact proportional grid position
+PASS: Corrida/frame_03.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_03.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_04.png
+PASS: Corrida/frame_04.png: 444x444 with alpha
+PASS: Corrida/frame_04.png: exact proportional grid position
+PASS: Corrida/frame_04.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_04.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_05.png
+PASS: Corrida/frame_05.png: 444x444 with alpha
+PASS: Corrida/frame_05.png: exact proportional grid position
+PASS: Corrida/frame_05.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_05.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_06.png
+PASS: Corrida/frame_06.png: 444x444 with alpha
+PASS: Corrida/frame_06.png: exact proportional grid position
+PASS: Corrida/frame_06.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_06.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_07.png
+PASS: Corrida/frame_07.png: 444x444 with alpha
+PASS: Corrida/frame_07.png: exact proportional grid position
+PASS: Corrida/frame_07.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_07.png: no silhouette pixels lost or duplicated
+PASS: Corrida: export order frame_08.png
+PASS: Corrida/frame_08.png: 444x444 with alpha
+PASS: Corrida/frame_08.png: exact proportional grid position
+PASS: Corrida/frame_08.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Corrida/frame_08.png: no silhouette pixels lost or duplicated
+PASS: Corrida: proportional cells cover full source exactly once
+PASS: Caminhada: original sheet unchanged
+PASS: Caminhada: original RGBA grid dimensions
+PASS: Caminhada: export order frame_01.png
+PASS: Caminhada/frame_01.png: 444x444 with alpha
+PASS: Caminhada/frame_01.png: exact proportional grid position
+PASS: Caminhada/frame_01.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_01.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_02.png
+PASS: Caminhada/frame_02.png: 444x444 with alpha
+PASS: Caminhada/frame_02.png: exact proportional grid position
+PASS: Caminhada/frame_02.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_02.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_03.png
+PASS: Caminhada/frame_03.png: 444x444 with alpha
+PASS: Caminhada/frame_03.png: exact proportional grid position
+PASS: Caminhada/frame_03.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_03.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_04.png
+PASS: Caminhada/frame_04.png: 444x444 with alpha
+PASS: Caminhada/frame_04.png: exact proportional grid position
+PASS: Caminhada/frame_04.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_04.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_05.png
+PASS: Caminhada/frame_05.png: 444x444 with alpha
+PASS: Caminhada/frame_05.png: exact proportional grid position
+PASS: Caminhada/frame_05.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_05.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_06.png
+PASS: Caminhada/frame_06.png: 444x444 with alpha
+PASS: Caminhada/frame_06.png: exact proportional grid position
+PASS: Caminhada/frame_06.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_06.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_07.png
+PASS: Caminhada/frame_07.png: 444x444 with alpha
+PASS: Caminhada/frame_07.png: exact proportional grid position
+PASS: Caminhada/frame_07.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_07.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: export order frame_08.png
+PASS: Caminhada/frame_08.png: 444x444 with alpha
+PASS: Caminhada/frame_08.png: exact proportional grid position
+PASS: Caminhada/frame_08.png: exact RGBA copy, only integer translation and transparent padding
+PASS: Caminhada/frame_08.png: no silhouette pixels lost or duplicated
+PASS: Caminhada: proportional cells cover full source exactly once
+PASS: physics: initial grounded contact and zero vertical speed
+PASS: physics: jump begins with upward 460 DIPs/s
+PASS: physics: double jump rejected during ascent
+PASS: physics: gravity accelerates by 110 DIPs/s in 100ms
+PASS: physics: vertical jump suspends horizontal animation and travel
+PASS: physics: apex height is approximately 96.18 DIPs
+PASS: physics: ascent transitions to descent
+PASS: physics: double jump rejected during descent
+PASS: physics: long interval lands exactly without crossing floor
+PASS: physics: jump available again after landing
+PASS: physics: elevated placement starts airborne
+PASS: physics: fall from rest uses constant acceleration
+PASS: physics: pause freezes position and velocity during fall
+PASS: physics: resume preserves accumulated falling velocity
+PASS: physics: visual reaction does not suspend gravity
+PASS: physics: landing and reaction complete independently
+PASS: physics: capture drag suspends gravity and clears momentum
+PASS: physics: drop retains pointer position and starts with zero velocity
+PASS: physics: gravity resumes on next tick without mouse throw
+PASS: physics: drop lands even after very long update
+PASS: physics: releasing directly on floor stays grounded
+PASS: physics: same DIP jump height at 100% DPI
+PASS: physics: physical floor contact at 100% DPI
+PASS: physics: DIP acceleration converted exactly at 100% DPI
+PASS: physics: same DIP jump height at 125% DPI
+PASS: physics: physical floor contact at 125% DPI
+PASS: physics: DIP acceleration converted exactly at 125% DPI
+PASS: physics: same DIP jump height at 150% DPI
+PASS: physics: physical floor contact at 150% DPI
+PASS: physics: DIP acceleration converted exactly at 150% DPI
+PASS: physics: same DIP jump height at 200% DPI
+PASS: physics: physical floor contact at 200% DPI
+PASS: physics: DIP acceleration converted exactly at 200% DPI
+PASS: physics: frame-rate independent ballistic integration dt=0,033333
+PASS: physics: frame-rate independent ballistic integration dt=0,016667
+PASS: physics: frame-rate independent ballistic integration dt=0,006944
+PASS: physics: frame-rate independent ballistic integration dt=0,137000
+PASS: physics: Walking jump keeps facing and uses existing airborne pose
+PASS: physics: Walking resumes ground state at exact landing
+PASS: physics: Walking eight-frame cycle resumes after landing
+PASS: physics: Walking long tick consumes post-landing time consistently
+PASS: physics: Running jump keeps facing and uses existing airborne pose
+PASS: physics: Running resumes ground state at exact landing
+PASS: physics: Running eight-frame cycle resumes after landing
+PASS: physics: Running long tick consumes post-landing time consistently
+PASS: physics: airborne horizontal limit on right
+PASS: physics: airborne horizontal limit on negative-coordinate monitor
+PASS: physics: grounded contact follows taskbar/work-area resize
+PASS: physics: display change preserves airborne momentum
+PASS: physics: explicit foot reference overrides file/window bottom
+PASS: physics: configurable gravity and jump impulse
+PASS: physics: non-positive/non-finite physical settings rejected
+PASS: physics: non-positive/non-finite physical settings rejected
+PASS: physics: Walking frame 1 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 2 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 3 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 4 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 5 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 6 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 7 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Walking frame 8 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 1 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 2 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 3 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 4 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 5 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 6 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 7 visible feet aligned to common ground within 0.5 DIP
+PASS: physics: Running frame 8 visible feet aligned to common ground within 0.5 DIP
+INFO: Caminhada_2.png antigo foi removido externamente; não é usado pelo aplicativo. Registro histórico preservado.
+PASS: physics: historical PNG hashes preserved except explicitly retired unused Caminhada_2
+PASS: physics UI: Pular disabled during global pause
+PASS: physics UI: Pular enabled after resume on floor
+PASS: physics UI: actual Pular menu handler selects airborne pose
+PASS: physics UI: actual menu rejects second airborne jump
+PASS: throw: recent drag estimates physical velocity in both axes
+PASS: throw: holding still before release removes stale impulse
+PASS: throw: tiny time intervals cannot create spurious impulse
+PASS: throw: uses recent motion instead of entire drag
+PASS: throw: release follows ballistic arc with horizontal momentum
+PASS: throw: ascent retains existing jump pose
+PASS: throw: descent uses supplied falling PNG
+PASS: throw: falling sprite decoded and cached
+PASS: throw: reacting preserves airborne horizontal momentum
+PASS: throw: global pause freezes full trajectory
+PASS: throw: landing absorbs momentum and restores ground behaviour
+PASS: throw: gentle drag retains ordinary vertical drop
+PASS: throw: impulse capped to configurable maximum magnitude
+PASS: throw: wall absorbs horizontal velocity while gravity continues
+PASS: throw: left fling preserves negative screen coordinates and facing
+PASS: throw: trajectory independent of update rate
+PASS: throw: physical mouse velocity converted correctly at 200 percent DPI
+PASS: throw: invalid mouse velocity falls back to safe drop
+PASS: throw: upward release from floor can lift off
+PASS: throw: downward release into floor is absorbed
+PASS: behavior: initial rest and no random decision per render frame
+PASS: behavior: seeded 10000-decision distribution matches 55/25/10/10 weights
+PASS: behavior: full action/physics trace reproduced with same seeds
+PASS: behavior: 90-second simulation independent of render update rate
+PASS: behavior: rest occupies more than 75 percent of seeded long simulation
+PASS: behavior: wander requests existing walking controller
+PASS: behavior: completed movement is followed by mandatory rest
+PASS: behavior: spontaneous run uses existing speed and finite duration
+PASS: behavior: automatic hop reuses ballistic jump without double jump
+PASS: behavior: hop cooldown prevents repeated rapid automatic jumps
+PASS: behavior: automatic hop declined when there is insufficient headroom
+PASS: behavior: close cursor interrupts wander with existing sceptical pose
+PASS: behavior: curiosity resumes interrupted movement without repositioning or reversing
+PASS: behavior: eligible approaching cursor on left can trigger short escape to right
+PASS: behavior: eight-second flee cooldown blocks a second eligible escape
+PASS: behavior: right-side approach chooses escape to left
+PASS: behavior: escape declined when moving away would hit monitor boundary
+PASS: behavior: close click/drag zone never triggers fleeing
+PASS: behavior: cursor reaction cooldown suppresses repeated curiosity
+PASS: behavior: stationary nearby cursor does not retrigger encounters continuously
+PASS: behavior: retreating cursor is distinguished from approaching cursor
+PASS: behavior: direct drag interrupts autonomy and suspends decisions
+PASS: behavior: autonomy does not interfere with manual airborne throw
+PASS: behavior: direct click overrides cursor reactions while gravity and throw continue
+PASS: behavior: manual interaction grants at least two seconds of quiet
+PASS: behavior: global pause freezes both decision timeline and movement
+PASS: behavior: disabling autonomy lets finite action finish then stays quiet
+PASS: behavior: manual jump and physics remain active with autonomy disabled
+PASS: behavior: click reaction remains available with autonomy disabled
+PASS: behavior: manual modes preserve walk/run preference and do not add spontaneous hops
+PASS: behavior: cursor distance uses DIPs on negative-coordinate 200-percent-DPI monitor
+PASS: behavior: perception requests only ten cursor polls per second and none when disabled
+PASS: behavior: excessive flee probability rejected
+PASS: behavior UI: Automatic, Walk and Run menu selections are mutually exclusive
+PASS: behavior UI: autonomy switch does not disable manual Pular command
+PASS: windows: classification excludes invalid, child, owned, shell, tooltip and overlay windows
+PASS: windows: excludes Smiley handle/process while retaining ordinary layered application windows
+PASS: windows: immutable geometric snapshot exposes negative coordinates and future top edge
+PASS: windows: unchanged polls reuse snapshot/arrays and emit no duplicate change notifications
+PASS: windows: move detected without resize and previous snapshot remains immutable
+PASS: windows: resize distinguished from move
+PASS: windows: simultaneous geometry and maximization changes kept in one coherent delta
+PASS: windows: minimized window removed from usable map while minimization event is retained
+PASS: windows: same HWND restored without false disappeared/appeared lifecycle
+PASS: windows: leaving minimization is reported even when restored window remains cloaked on another desktop
+PASS: windows: hidden, cloaked and failed-DWM samples never become platform candidates
+PASS: windows: empty/inverted geometric bounds rejected
+PASS: windows: overlapping windows retain front-to-back Z order independently of geometry
+PASS: windows: duplicate handles do not corrupt ordering or duplicate rectangles
+PASS: windows: disappeared HWND removed from map and reported once
+PASS: windows: failed or partial enumeration preserves last complete snapshot
+PASS: windows: recycled HWND with different process identity creates replacement events
+PASS: windows: physical rectangles remain unscaled across negative/mixed-DPI monitor scenarios
+PASS: windows: event reentrancy cannot publish nested partial snapshots
+PASS: windows: independent 200ms observation runs without render/behaviour updates and stops cleanly
+PASS: windows: disposing observer releases timer and current geometric state
+PASS: windows: invalid polling interval rejected
+PASS: windows native: EnumWindows/DWM detects real WPF application fixture
+PASS: windows native: moving/resizing real HWND produces geometric delta
+PASS: windows native: IsIconic excludes minimized fixture
+PASS: windows native: restoring fixture returns same HWND to map
+PASS: windows native: IsZoomed identifies maximized fixture
+PASS: windows native: hidden fixture does not remain a usable rectangle
+PASS: windows native: every Smiley-process window including diagnostic is excluded
+PASS: windows native: fixture destroyed after DWM read is excluded by final handle validation
+PASS: windows native: closing fixture reports disappearance
+PASS: platforms: visible top edge becomes source-indexed physical segment without copying window map
+PASS: platforms: foreground rectangle cuts exactly the covered part of background top edge
+PASS: platforms: overlapping, touching and duplicate blockers produce merged gaps without duplicate segments
+PASS: platforms: fully occluded and too-short surfaces are unavailable
+PASS: platforms: horizontal overlap alone and exclusive bottom contact do not occlude a top edge
+PASS: platforms: exposure depends on Z values rather than input enumeration order
+PASS: platforms: downward fall lands with visual foot reference aligned exactly and one active support
+PASS: platforms: swept descent selects first upper platform before lower surface or desktop floor
+PASS: platforms: upward traversal is free and the same plane catches the later descending crossing
+PASS: platforms: fast diagonal throw hits short segment at crossing time even when final free-flight position would miss it
+PASS: platforms: silhouette/arm width is not enough when foot interval misses surface
+PASS: platforms: existing walk/run speeds and eight-frame cycles work on support with fixed feet height
+PASS: platforms: walking beyond sufficient foot overlap falls during same update without recapturing zero-time edge
+PASS: platforms: manual jump releases support and can land on it again without double jump
+PASS: platforms: moving support preserves updated horizontal offset and follows new top without artificial momentum
+PASS: platforms: moved/resized source with invalid support drops at current position without teleport
+PASS: platforms: minimized/hidden/unavailable/closed windows release current support and reuse falling pose
+PASS: platforms: new foreground occlusion invalidates foot region without snapping to covering window
+PASS: platforms: window appearing exactly under stationary unsupported feet cannot arbitrarily capture body
+PASS: platforms: rising window passing through descending body cannot lift or capture it from below
+PASS: platforms: recycled HWND replacement cannot inherit old support
+PASS: platforms: drag detaches; quiet valid release attaches; upward throwing from same contact lifts off
+PASS: platforms: paused support remains frozen and reconciles latest geometry once on resume
+PASS: platforms: source closed during pause starts ordinary short fall on resume without elapsed-time jump
+PASS: platforms: transient tracker failure has one-second grace then drops; recovery never snaps body upward
+PASS: platforms: unchanged stale heartbeat cannot sustain support indefinitely even if old success flag remains true
+PASS: platforms: healthy heartbeat with identical geometry reuses platform snapshot
+PASS: platforms: support width, collisions and visual foot line agree at 100/125/150/200 percent DPI
+PASS: platforms: negative horizontal and vertical monitor coordinates remain physical and supported
+PASS: platforms: maximized top edge is geometric data but cannot park body outside monitor headroom
+PASS: platforms: landing, walk-off and fall consume event time independently of render rate
+PASS: platforms: unchanged behaviour layer can idle and execute finite locomotion on window support
+PASS: platforms native: real DWM fixture becomes exposed landing surface
+PASS: platforms native: moving real WPF source carries existing physical support
+PASS: platforms native: minimization and closure of actual source release its support
+PASS: support refresh: 60 targeted samples carry body without full enumeration or modifying immutable 200ms snapshot
+PASS: support refresh: stationary targeted geometry reuses immutable overlay
+PASS: support refresh: next full snapshot preserves position without rollback or applying movement twice
+PASS: support refresh: targeted minimization removes support without position jump
+PASS: support refresh: recycled identity and unknown HWND are rejected without enumeration
+PASS: support refresh: failed targeted read and expired general map cannot invent valid support
+PASS: support refresh native: DWM reads moved WPF support before next general poll
+PASS: support refresh native: closed support HWND rejected immediately
+PASS: navigation: same-platform destinations reserve full foot band plus eight-DIP safety margins
+PASS: navigation: descending ballistic root and bounded horizontal velocity predict a nearby safe landing
+PASS: navigation: rise beyond jump apex plus safety margin is rejected
+PASS: navigation: impossible horizontal gap is rejected instead of increasing launch speed
+PASS: navigation: collision-capable narrow ledge is rejected when safe landing margins do not fit
+PASS: navigation: unhealthy or unavailable geometry never produces a new plan
+PASS: navigation: plan rejects descent intercepted by original platform before chosen lower surface
+PASS: navigation: destinations outside current monitor work area are never deliberate routes
+PASS: navigation: walking preference cannot borrow running speed to bridge an unreachable gap
+PASS: navigation: candidate scoring favors nearby reachable surfaces
+PASS: navigation: chooses destination then walks to departure instead of teleporting or launching immediately
+PASS: navigation: directed jump starts only after exact finite approach reaches launch point
+PASS: navigation: actual continuous physics lands on chosen destination, beyond prediction alone
+PASS: navigation: mandatory rest and global navigation cooldown prevent immediate second jump
+PASS: navigation: directed launch respects run-speed cap, existing vertical impulse and no double jump
+PASS: navigation: manual jump remains vertical
+PASS: navigation: Minimized destination cancels approach safely before jump
+PASS: navigation: Hidden destination cancels approach safely before jump
+PASS: navigation: closed destination cancels pre-launch movement
+PASS: navigation: changed destination geometry replans approach on the decision timeline
+PASS: navigation: unrelated snapshot change preserves plan without recalculating its target
+PASS: navigation: foreground occlusion removes planned destination and stops approach
+PASS: navigation: destination resized below safe foot margin cancels launch
+PASS: navigation: moving source reconciles relative support then replans departure
+PASS: navigation: loss of launch support cancels approach and leaves ordinary falling physics authoritative
+PASS: navigation: target moving out of flight path causes a real miss, never a teleport to planned HWND
+PASS: navigation: flight fixture begins a real autonomous jump
+PASS: navigation: target disappearing midair preserves ballistic motion without steering or teleporting
+PASS: navigation: missed destination is detected from real landing and receives retry cooldown
+PASS: navigation: reappearing failed target is not retried during thirty-second per-window cooldown
+PASS: navigation: target becomes eligible again after bounded failure cooldown expires
+PASS: navigation: global pause freezes approach, plan and simulation time
+PASS: navigation: latest destination removal is reconciled on resume without a time jump
+PASS: navigation: manual drag immediately overrides planned approach
+PASS: navigation: cancelling intent never overwrites manual throw impulse
+PASS: navigation: direct click cancels plan and preserves manual quiet interval
+PASS: navigation: grounded cursor reaction preempts approach
+PASS: navigation: cursor does not trigger flee during an already launched planned flight
+PASS: navigation: window exploration is off by default and old decisions remain available
+PASS: navigation: disabled autonomy blocks routes while manual jump remains available
+PASS: navigation: disabling exploration during flight cancels intention without cancelling physical flight
+PASS: navigation: tracker failure immediately stops planning despite physical support grace period
+PASS: navigation: repeated seeded local wandering remains inside safe foot margins and stops at finite destinations
+PASS: navigation: floor is a valid launch origin for a nearby reachable window
+PASS: navigation: another exposed segment of the same HWND can be a distinct reachable destination
+PASS: navigation: insufficient monitor headroom rejects autonomous jump arc
+PASS: navigation: planner uses configured gravity, jump and movement limits rather than duplicated defaults
+PASS: navigation: actual landing agrees across negative desktop coordinates and 100/125/150/200 percent DPI
+PASS: navigation: fixed seed yields equivalent exploration across coarse updates and 144Hz rendering
+PASS: navigation native: real DWM geometry from two WPF windows produces an actual autonomous destination landing
+PASS: navigation UI: real menu starts disabled and toggles exploration on and off through bound handlers
+PASS: alpha holes excluded from native hit region
+PASS: mirrored hit region follows mirrored image
+PASS: uniform bottom-aligned letterbox stays click-through
+PASS: native HWND region matches alpha mask including holes
+PASS: native region cache reuses same frame and DPI
+PASS: native cache separates mirrored orientation
+PASS: native cache separates animation frames
+PASS: native cache separates DPI dimensions
+PASS: cached GDI resources released on close
+PASS: original unchanged: Cheering Hooded Mascot with Energy Rays.png
+PASS: original unchanged: Chibi Shadow Mascot Reaching Out.png
+PASS: original unchanged: Confident Hooded Pixel Hero.png
+PASS: original unchanged: Fearless Hooded Mascot Pose.png
+PASS: original unchanged: Frowning Hooded Void Mascot.png
+PASS: original unchanged: Hooded Chibi with Reflective Shades.png
+PASS: original unchanged: Hooded Detective with Magnifying Glass.png
+PASS: original unchanged: Joyful Hooded Character Waving.png
+PASS: original unchanged: Neutral Hooded Shadow Mascot.png
+PASS: original unchanged: Running Hooded Sprite in Motion.png
+PASS: original unchanged: Sceptical Hooded Chibi Character.png
+PASS: original unchanged: Shadowy Voxel Mascot Reaching Upward.png
+PASS: original unchanged: Startled Hooded Chibi Character.png
+INFO: Caminhada_2.png antigo foi removido externamente; não é usado pelo aplicativo. Registro histórico preservado.
+PASS: remaining historical source PNGs unchanged; retired Caminhada_2 explicitly reported
+PASS: all PNGs in Mark II.C snapshot remain present and byte-identical
+PASS: Mark III.C preserves throw estimator and sprites byte-identically; behavior and physics are covered by regression tests
+603 checks passed.

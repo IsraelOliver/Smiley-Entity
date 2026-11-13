@@ -1,0 +1,15 @@
+bin/
+obj/
+Tests/bin/
+Tests/obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+.env
+.env.*
+!.env.example
+*.log
+Thumbs.db
+Desktop.ini

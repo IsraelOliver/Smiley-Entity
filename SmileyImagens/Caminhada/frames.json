@@ -1,0 +1,95 @@
+{
+  "Source": "Folhagens do Caminho em Oito Passos.png",
+  "SourceSha256": "C42845E4F9DFFE9985CFD3DCD3CACCC83207264D613BA7E2CB2300768BB8504A",
+  "FrameSize": 444,
+  "Frames": [
+    {
+      "File": "frame_01.png",
+      "X": 0,
+      "Y": 0,
+      "Width": 444,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 2,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_02.png",
+      "X": 444,
+      "Y": 0,
+      "Width": 443,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 1,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_03.png",
+      "X": 887,
+      "Y": 0,
+      "Width": 444,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 7,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_04.png",
+      "X": 1331,
+      "Y": 0,
+      "Width": 443,
+      "Height": 444,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 13,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_05.png",
+      "X": 0,
+      "Y": 444,
+      "Width": 444,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 9,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_06.png",
+      "X": 444,
+      "Y": 444,
+      "Width": 443,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 8,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_07.png",
+      "X": 887,
+      "Y": 444,
+      "Width": 444,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 8,
+      "Baseline": 443
+    },
+    {
+      "File": "frame_08.png",
+      "X": 1331,
+      "Y": 444,
+      "Width": 443,
+      "Height": 443,
+      "OffsetX": 0,
+      "OffsetY": 0,
+      "Top": 6,
+      "Baseline": 443
+    }
+  ]
+}
